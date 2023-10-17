@@ -19,5 +19,13 @@ At present, our UVC cameras support Windows, Linux, MAC, and Android systems, bu
 
 
 # UVC Cameras works on Windows
-
+- AMCAP
+- PotPlayer
+- Python OpenCV Demo
+- OpenCV, Python, and GStreamer on Windows
 # UVC Cameras works on Linux
+- V4L utility packages
+- qv4l2
+- Guvcview
+- Python OpenCV Demo
+- OpenCV, Python, and GStreamer on Linux
