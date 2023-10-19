@@ -11,4 +11,4 @@
 # Appication
 # How to USE
 - [Hardware Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/U20CAM-9281M%20HW%20Manual.pdf "Hardware Manual")
-- [Software Manual](https://www.inno-maker.com "Software Manual")
+- [Software Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/UVC%20SW%20Manual.pdf "Software Manual")
