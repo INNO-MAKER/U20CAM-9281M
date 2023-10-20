@@ -1,7 +1,7 @@
 # U20CAM-9281M UserManual
 ![Images](Images/U20AM-9281-2.jpg "U20CAM9281")
 # Features
-- U20CAM-9281M is a 1.3Megapixel global shutter uvc camera module by mmono sensor ov9281;
+- U20CAM-9281M is a 1.3Megapixel global shutter uvc camera module by mono sensor ov9281;
 - Support plug and play for Windows, Linux, MAC, Android systems with uvc drivers(USB Video Class.);
 - Support hardware external trigger mode and live streamming mode; 
 - Support maximum  resolution up to 1280x800 at framerate 120fps,default 1280x800 at framerate 30fps.
@@ -28,5 +28,5 @@
 # Specification
 # Appication
 # How to USE
-- [Hardware Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/U20CAM-9281M%20HW%20Manual.pdf "Hardware Manual")
-- [Software Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/UVC%20SW%20Manual.pdf "Software Manual")
+- [Hardware Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/U20CAM-9281M-HW-V1.pdf "Hardware Manual")
+- [Software Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/UVC-SW-Manual-V1.pdf "Software Manual")
