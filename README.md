@@ -9,7 +9,7 @@
 - Provide AMCAP,Potplayer,Opencv python samples for window;
 - Provide guvcview,v4l utility tools,opencv python,gstreamer,samples;
 - MJPG Output resolutions:
-  - 1280x800 120fps,30fps,15pfs,10fps
+  - 1280x800 120fps,30fps,15fps,10fps
   - 1280x720 120fps,60fps,30fps,20fps,15pfs,10fps 
   - 800x600  120fps,60fps,30fps,20fps,15pfs,10fps
   - 640x360  120fps,60fps,30fps,20fps,15pfs,10fps
