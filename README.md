@@ -30,3 +30,12 @@
 # How to USE
 - [Hardware Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/U20CAM-9281M-HW-V1.pdf "Hardware Manual")
 - [Software Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/UVC-SW-Manual-V1.pdf "Software Manual")
+# More Information
+
+- (1) OpenCV (opencv-python): OpenCV is an open-source computer vision library that allows easy access to UVC cameras via cv2.VideoCapture. Official documentation link: https://opencv.org/ PyPI installation link: https://pypi.org/project/opencv-python/
+
+- (2) PyUVC: PyUVC is a Python library for accessing UVC cameras that interacts directly with the UVC protocol. GitHub repository: https://github.com/pyuvc/pyuvc PyPI installation link: https://pypi.org/project/pyuvc/
+
+- (3) VideoCapture (Python wrapper for V4L2):If you're working on a Linux system, VideoCapture is a simple interface that allows you to interact with cameras via V4L2. GitHub repository: https://github.com/charlesw/VideoCapture
+
+- (4) libuvc:libuvc is an open-source UVC (USB Video Class) driver that provides APIs to control UVC devices. Python wrappers can be used via ctypes or cffi. GitHub repository: https://github.com/libuvc/libuvc
