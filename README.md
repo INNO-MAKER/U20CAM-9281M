@@ -29,7 +29,7 @@
 # Appication
 # How to USE
 - [Hardware Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/U20CAM-9281M-HW-V1.pdf "Hardware Manual")
-- [Software Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/UVC-SW-Manual-V1.pdf "Software Manual")
+- [Software Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/U20CAM-9281M-HW-V1.pdf "Software Manual")
 # More Information
 
 - (1) OpenCV (opencv-python): OpenCV is an open-source computer vision library that allows easy access to UVC cameras via cv2.VideoCapture. Official documentation link: https://opencv.org/ PyPI installation link: https://pypi.org/project/opencv-python/
