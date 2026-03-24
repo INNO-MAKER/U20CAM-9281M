@@ -1,0 +1,1 @@
+sudo gpioset -t 5ms,5ms -c 0 23=0
