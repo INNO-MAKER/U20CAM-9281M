@@ -1,41 +1,85 @@
-# U20CAM-9281M UserManual
-![Images](Images/U20AM-9281-2.jpg "U20CAM9281")
-# Features
-- U20CAM-9281M is a 1.3Megapixel global shutter uvc camera module by mono sensor ov9281;
-- Support plug and play for Windows, Linux, MAC, Android systems with uvc drivers(USB Video Class.);
-- Support hardware external trigger mode and live streamming mode; 
-- Support maximum  resolution up to 1280x800 at framerate 120fps,default 1280x800 at framerate 30fps.
-- Provide hardware connection for external trigger and stobe signal,software setup for extrenal trigger.
-- Provide AMCAP,Potplayer,Opencv python samples for window;
-- Provide guvcview,v4l utility tools,opencv python,gstreamer,samples;
-- MJPG Output resolutions:
-  - 1280x800 120fps,30fps,15fps,10fps
-  - 1280x720 120fps,60fps,30fps,20fps,15pfs,10fps 
-  - 800x600  120fps,60fps,30fps,20fps,15pfs,10fps
-  - 640x360  120fps,60fps,30fps,20fps,15pfs,10fps
-  - 640x400  120fps,60fps,30fps,20fps,15pfs,10fps
-  - 640x480  120fps,60fps,30fps,20fps,15pfs,10fps
-  - 320x240  120fps,60fps,30fps,20fps,15pfs,10fps
-  - 320x200  120fps,60fps,30fps
-- YUY2 Output resolutions:
-  - 1280x80  10fps
-  - 1280x720 10fps
-  - 800x600  10fps
-  - 640x400  30fps,20fps,15pfs,10fps
-  - 640x480  30fps,20fps,15pfs,10fps
-  - 320x240  60fps,30fps,20fps,15pfs,10fps
-  - 320x200  60fps,30fps,20fps,15pfs,10fps
-# Specification
-# Appication
-# How to USE
-- [User Manual](https://github.com/INNO-MAKER/U20CAM-9281M/blob/main/Manual/U20CAM-9281M-V11.pdf "User Manual")
+# U20CAM-9281M 1.3MP Global Shutter UVC Camera Module
 
-# More Information
+![U20CAM9281](Images/U20AM-9281-2.jpg)
 
-- (1) OpenCV (opencv-python): OpenCV is an open-source computer vision library that allows easy access to UVC cameras via cv2.VideoCapture. Official documentation link: https://opencv.org/ PyPI installation link: https://pypi.org/project/opencv-python/
+The **U20CAM-9281M** is a high-performance, 1.3-megapixel monochrome global shutter camera module based on the **OmniVision OV9281** sensor. Designed for high-speed motion capture and machine vision, it features a standard UVC (USB Video Class) interface for driver-free operation across all major operating systems.
 
-- (2) PyUVC: PyUVC is a Python library for accessing UVC cameras that interacts directly with the UVC protocol. GitHub repository: https://github.com/pyuvc/pyuvc PyPI installation link: https://pypi.org/project/pyuvc/
+---
 
-- (3) VideoCapture (Python wrapper for V4L2):If you're working on a Linux system, VideoCapture is a simple interface that allows you to interact with cameras via V4L2. GitHub repository: https://github.com/charlesw/VideoCapture
+## Key Features
 
-- (4) libuvc:libuvc is an open-source UVC (USB Video Class) driver that provides APIs to control UVC devices. Python wrappers can be used via ctypes or cffi. GitHub repository: https://github.com/libuvc/libuvc
+*   **Global Shutter Technology**: Eliminates rolling shutter distortion, making it ideal for high-speed motion analysis and barcode scanning.
+*   **High Frame Rate**: Supports up to **120 fps** at full resolution (1280x800) in MJPG mode.
+*   **Plug-and-Play**: Fully compliant with UVC standards. Works out-of-the-box on Windows, Linux, macOS, and Android.
+*   **Hardware Trigger & Strobe**: Dedicated headers for external hardware trigger input and strobe output synchronization.
+*   **Compact Industrial Design**: USB 2.0 interface, low power consumption, and robust build quality.
+
+---
+
+## Specifications
+
+| Feature | Specification |
+| :--- | :--- |
+| **Sensor** | OmniVision OV9281 (Monochrome, Global Shutter) |
+| **Resolution** | 1280 (H) x 800 (V), 1.3 MP |
+| **Pixel Size** | 3.0 µm x 3.0 µm |
+| **Optical Size** | 1/4 inch |
+| **Interface** | USB 2.0 (UVC Compliant) |
+| **Output Formats** | MJPG / YUY2 |
+| **Max Frame Rate** | 120 fps @ 1280x800 (MJPG) |
+| **Shutter Type** | Global Shutter |
+| **Operating Temp** | -20°C to +70°C |
+
+### Supported Resolutions (MJPG)
+*   1280x800 @ 120/30/15/10 fps
+*   1280x720 @ 120/60/30/20/15/10 fps
+*   800x600 @ 120/60/30/20/15/10 fps
+*   640x480 @ 120/60/30/20/15/10 fps
+
+---
+
+## Hardware Interface & Trigger
+
+The module provides physical pins for advanced synchronization:
+*   **External Trigger**: Allows the camera to capture frames based on an external electrical signal.
+*   **Strobe Output**: Provides a signal to synchronize external lighting (e.g., LED flash) with the exposure.
+
+### Trigger Scripts
+Example scripts for Raspberry Pi GPIO triggering are included:
+*   [`ov9281_trig_sig_pin23.sh`](./ov9281_trig_sig_pin23.sh): Standard GPIO trigger loop.
+*   [`ov9281_trig_sig_pin23_trixieos.sh`](./ov9281_trig_sig_pin23_trixieos.sh): Optimized for the latest Raspberry Pi OS (Bookworm/Trixie).
+
+---
+
+## Software & Examples
+
+### Windows
+*   **AMCAP**: A simple utility for preview and capture ([`AMCAP2.EXE`](./AMCAP2.EXE)).
+*   **PotPlayer**: Recommended for high-frame-rate preview.
+*   **Python/OpenCV**: See [`capture.py`](./capture.py) and [`capture2.py`](./capture2.py) for implementation examples.
+
+### Linux
+*   **Guvcview / qv4l2**: Standard UVC viewing tools.
+*   **V4L2-CTL**: Command-line tool for parameter adjustment.
+    ```bash
+    v4l2-ctl -d /dev/video0 --list-formats-ext
+    ```
+
+---
+
+## Repository Structure
+
+*   [`Images/`](./Images/): Product photos and connection diagrams.
+*   [`Manual/`](./Manual/): 
+    *   [`U20CAM-9281M-V11.pdf`](./Manual/U20CAM-9281M-V11.pdf): Full technical user manual.
+    *   [`sw.md`](./Manual/sw.md): Software setup and UVC protocol guide.
+    *   [`CE/FCC Certifications`](./Manual/): Compliance documentation.
+*   [`capture.py`](./capture.py) / [`capture2.py`](./capture2.py): Python OpenCV capture samples.
+*   [`AMCAP2.EXE`](./AMCAP2.EXE): Windows capture utility.
+
+---
+
+## Support
+
+*   **Website**: [www.inno-maker.com](https://www.inno-maker.com)
+*   **Email**: [support@inno-maker.com](mailto:support@inno-maker.com) | [sales@inno-maker.com](mailto:sales@inno-maker.com)
