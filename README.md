@@ -1,8 +1,8 @@
-# U20CAM-9281M 1.3MP Global Shutter UVC Camera Module
+# U20CAM-9281M 1MP Global Shutter UVC Camera Module
 
 ![U20CAM9281](Images/U20AM-9281-2.jpg)
 
-The **U20CAM-9281M** is a high-performance, 1.3-megapixel monochrome global shutter camera module based on the **OmniVision OV9281** sensor. Designed for high-speed motion capture and machine vision, it features a standard UVC (USB Video Class) interface for driver-free operation across all major operating systems.
+The **U20CAM-9281M** is a high-performance, 1-megapixel monochrome global shutter camera module based on the **OmniVision OV9281** sensor. Designed for high-speed motion capture and machine vision, it features a standard UVC (USB Video Class) interface for driver-free operation across all major operating systems.
 
 ---
 
@@ -21,7 +21,7 @@ The **U20CAM-9281M** is a high-performance, 1.3-megapixel monochrome global shut
 | Feature | Specification |
 | :--- | :--- |
 | **Sensor** | OmniVision OV9281 (Monochrome, Global Shutter) |
-| **Resolution** | 1280 (H) x 800 (V), 1.3 MP |
+| **Resolution** | 1280 (H) x 800 (V), 1 MP |
 | **Pixel Size** | 3.0 µm x 3.0 µm |
 | **Optical Size** | 1/4 inch |
 | **Interface** | USB 2.0 (UVC Compliant) |
