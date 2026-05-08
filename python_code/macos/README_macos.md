@@ -22,8 +22,8 @@ If `brew tap` is not available, build from source:
 
 ```bash
 git clone https://github.com/jtfrey/uvc-util.git
-cd uvc-util
-make
+cd uvc-util/src
+gcc -o uvc-util -framework IOKit -framework Foundation uvc-util.m UVCController.m UVCType.m UVCValue.m
 sudo cp uvc-util /usr/local/bin/
 ```
 
@@ -36,7 +36,7 @@ pip3 install opencv-python numpy
 ### 3. Verify the camera is detected
 
 ```bash
-uvc-util -I 0 -s
+uvc-util -I 0 -c
 ```
 
 You should see a list of UVC controls including `exposure-time-abs`,
