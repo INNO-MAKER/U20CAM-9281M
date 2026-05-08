@@ -232,6 +232,36 @@ See [`python_code/macos/README_macos.md`](./python_code/macos/README_macos.md) f
 
 ---
 
+## Serial Number Editor Tool
+
+The **U20CAM-SN Edit** utility allows you to modify the camera's unique serial number for device identification and management in multi-camera setups.
+
+### Features
+
+*   **Unique Serial Number Assignment**: Assign custom serial numbers to each camera module for easy identification
+*   **Batch Operations**: Manage multiple cameras efficiently
+*   **Windows GUI Application**: User-friendly interface for serial number editing
+*   **Persistent Storage**: Serial numbers are stored in the camera's EEPROM
+
+### Quick Start
+
+1. Download and extract [`U20CAM-SN Edit release.zip`](./unique_serial_number_editor/U20CAM-SN%20Edit%20release.zip)
+2. Connect the U20CAM-9281M camera to your Windows PC via USB
+3. Run `InnoMaker_U20CAM_SN_Edit.exe`
+4. Follow the on-screen instructions to modify the serial number
+5. Restart the camera or reconnect the USB cable to apply changes
+
+### Use Cases
+
+*   **Multi-Camera Systems**: Identify individual cameras in setups with multiple modules
+*   **Inventory Management**: Track and manage cameras with unique identifiers
+*   **Device Enumeration**: Ensure consistent camera detection across system reboots
+*   **Quality Control**: Mark cameras with batch or production information
+
+For detailed instructions, see [`U20CAM-SN Edit user guide.pdf`](./unique_serial_number_editor/) included in the release package.
+
+---
+
 ## Cross-Platform Comparison
 
 | Aspect | Windows | Linux | macOS |
@@ -259,6 +289,9 @@ See [`python_code/macos/README_macos.md`](./python_code/macos/README_macos.md) f
 *   [`AMCAP2.EXE`](./AMCAP2.EXE): Windows capture utility.
 *   [`ov9281_trig_sig_pin23.sh`](./ov9281_trig_sig_pin23.sh): Raspberry Pi GPIO trigger script.
 *   [`ov9281_trig_sig_pin23_trixieos.sh`](./ov9281_trig_sig_pin23_trixieos.sh): Raspberry Pi Trixie OS trigger script.
+*   [`unique_serial_number_editor/`](./unique_serial_number_editor/): Tool for modifying camera unique serial numbers
+    *   [`U20CAM-SN Edit release.zip`](./unique_serial_number_editor/U20CAM-SN%20Edit%20release.zip): Windows GUI application for editing camera serial numbers
+    *   [`U20CAM-SN Edit user guide.pdf`](./unique_serial_number_editor/): Complete user guide for serial number editing
 
 ---
 
