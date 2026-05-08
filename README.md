@@ -54,16 +54,194 @@ Example scripts for Raspberry Pi GPIO triggering are included:
 ## Software & Examples
 
 ### Windows
+
+#### Using AMCAP Utility
 *   **AMCAP**: A simple utility for preview and capture ([`AMCAP2.EXE`](./AMCAP2.EXE)).
 *   **PotPlayer**: Recommended for high-frame-rate preview.
-*   **Python/OpenCV**: See [`capture.py`](./capture.py) and [`capture2.py`](./capture2.py) for implementation examples.
+
+#### Python/OpenCV on Windows
+
+**Requirements:**
+```cmd
+pip install opencv-python numpy
+```
+
+**Critical: Use DirectShow Backend**
+
+Windows OpenCV defaults to MSMF (Media Foundation), which has very limited UVC control support. You must explicitly request the DirectShow backend:
+
+```python
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)   # CORRECT
+cap = cv2.VideoCapture(0)                  # WRONG (uses MSMF, exposure won't work)
+```
+
+**Exposure Value Uses log2(seconds)**
+
+Unlike Linux or macOS, DirectShow uses a logarithmic exposure scale:
+
+| log2 Value | Exposure | Max FPS |
+|-----------|----------|---------|
+| -5        | 31.25 ms | ~30     |
+| -6        | 15.6 ms  | ~60     |
+| -7        | 7.8 ms   | ~120    |
+| -8        | 3.9 ms   | ~120    |
+| -9        | 1.95 ms  | ~120    |
+| -10       | 0.98 ms  | -       |
+
+**Quick Start:**
+```cmd
+# List available cameras
+python python_code/windows/u20cam_windows_control.py --list
+
+# Show camera status
+python python_code/windows/u20cam_windows_control.py --status
+
+# Stream mode + manual exposure 5ms + gain 32
+python python_code/windows/u20cam_windows_control.py --mode stream --exposure-ms 5 --gain 32
+
+# Apply settings + live preview
+python python_code/windows/u20cam_windows_control.py --mode stream --exposure-ms 5 --gain 32 --preview
+```
+
+See [`python_code/windows/README_windows.md`](./python_code/windows/README_windows.md) for complete documentation.
+
+---
 
 ### Linux
+
+#### Using Standard Tools
 *   **Guvcview / qv4l2**: Standard UVC viewing tools.
 *   **V4L2-CTL**: Command-line tool for parameter adjustment.
     ```bash
     v4l2-ctl -d /dev/video0 --list-formats-ext
     ```
+
+#### Python/OpenCV on Linux
+
+**Requirements:**
+```bash
+sudo apt install v4l-utils
+pip3 install opencv-python numpy
+```
+
+**Features:**
+- Switch between **Stream Mode** (free-running) and **Trigger Mode** (FSIN-driven)
+- Set manual exposure value (in milliseconds)
+- Set gain value
+- Restore auto exposure
+- Live preview to verify settings
+
+**Exposure Time Reference (UVC Standard: 100us units)**
+
+| UVC Value | Exposure Time | Max FPS |
+|-----------|---------------|---------|
+| 10        | 1 ms          | 1000    |
+| 50        | 5 ms          | 200     |
+| 83        | 8.3 ms        | ~120    |
+| 100       | 10 ms         | 100     |
+| 167       | 16.7 ms       | ~60     |
+| 333       | 33.3 ms       | ~30     |
+
+**Quick Start:**
+```bash
+# Show current camera status
+python3 python_code/linux/u20cam_linux_control.py --status
+
+# Stream mode with manual exposure 5ms + gain 32
+python3 python_code/linux/u20cam_linux_control.py --mode stream --exposure-ms 5 --gain 32
+
+# Switch to trigger mode (waits for external FSIN pulse)
+python3 python_code/linux/u20cam_linux_control.py --mode trigger
+
+# Apply settings + live preview
+python3 python_code/linux/u20cam_linux_control.py --mode stream --exposure-ms 5 --gain 32 --preview
+```
+
+See [`python_code/linux/README_linux.md`](./python_code/linux/README_linux.md) for complete documentation.
+
+---
+
+### macOS
+
+#### Python/OpenCV on macOS
+
+**Requirements:**
+```bash
+pip3 install opencv-python numpy
+```
+
+**Important: Use uvc-util for Exposure Control**
+
+OpenCV on macOS uses AVFoundation, which has very limited UVC control support. The reliable solution is to use **`uvc-util`** to set exposure directly on the camera, then open with OpenCV.
+
+**Installation:**
+```bash
+# Option 1: Homebrew (if available)
+brew install uvc-util
+
+# Option 2: Build from source
+git clone https://github.com/jtfrey/uvc-util.git
+cd uvc-util/src
+gcc -o uvc-util -framework IOKit -framework Foundation uvc-util.m UVCController.m UVCType.m UVCValue.m
+sudo cp uvc-util /usr/local/bin/
+```
+
+**Verify Camera Detection:**
+```bash
+uvc-util -I 0 -c
+```
+
+**Exposure Time Unit (UVC Standard: 100us units)**
+
+| UVC Value | Exposure Time |
+|-----------|---------------|
+| 1         | 0.1 ms        |
+| 10        | 1 ms          |
+| 50        | 5 ms          |
+| 83        | 8.3 ms (~120fps limit) |
+| 100       | 10 ms         |
+
+**Quick Start:**
+```bash
+# Step 1: Switch to manual exposure mode
+uvc-util -I 0 -s auto-exposure-mode=1
+
+# Step 2: Set exposure to 5ms
+uvc-util -I 0 -s exposure-time-abs=50
+
+# Step 3: Verify
+uvc-util -I 0 -g exposure-time-abs
+
+# Step 4: Run your OpenCV Python code
+python3 python_code/macos/u20cam_exposure_macos.py --exposure-ms 5 --preview
+```
+
+**Using the Helper Script:**
+```bash
+# List camera controls
+python3 python_code/macos/u20cam_exposure_macos.py --list
+
+# Set 5ms exposure with live preview
+python3 python_code/macos/u20cam_exposure_macos.py --exposure-ms 5 --preview
+
+# Restore auto exposure
+python3 python_code/macos/u20cam_exposure_macos.py --auto
+```
+
+See [`python_code/macos/README_macos.md`](./python_code/macos/README_macos.md) for complete documentation.
+
+---
+
+## Cross-Platform Comparison
+
+| Aspect | Windows | Linux | macOS |
+|--------|---------|-------|-------|
+| **Tool** | OpenCV CAP_DSHOW | v4l2-ctl | uvc-util |
+| **Exposure Unit** | log2(seconds) | 100us (UVC) | 100us (UVC) |
+| **Manual Exposure** | `CAP_PROP_AUTO_EXPOSURE=0.25` | `auto_exposure=1` | `auto-exposure-mode=1` |
+| **Auto Exposure** | `CAP_PROP_AUTO_EXPOSURE=0.75` | `auto_exposure=3` | `auto-exposure-mode=8` |
+| **Trigger Mode** | `CAP_PROP_AUTOFOCUS=1` (firmware-dependent) | `focus_automatic_continuous=1` | `auto-focus=1` (firmware-dependent) |
+| **Trigger Reliability** | Low (use AMCap if needed) | High | Medium |
 
 ---
 
@@ -74,8 +252,13 @@ Example scripts for Raspberry Pi GPIO triggering are included:
     *   [`U20CAM-9281M-V11.pdf`](./Manual/U20CAM-9281M-V11.pdf): Full technical user manual.
     *   [`sw.md`](./Manual/sw.md): Software setup and UVC protocol guide.
     *   [`CE/FCC Certifications`](./Manual/): Compliance documentation.
-*   [`capture.py`](./capture.py) / [`capture2.py`](./capture2.py): Python OpenCV capture samples.
+*   [`python_code/`](./python_code/): Cross-platform Python control scripts
+    *   [`windows/`](./python_code/windows/): Windows DirectShow control script and examples
+    *   [`linux/`](./python_code/linux/): Linux v4l2-ctl control script and examples
+    *   [`macos/`](./python_code/macos/): macOS uvc-util control script and examples
 *   [`AMCAP2.EXE`](./AMCAP2.EXE): Windows capture utility.
+*   [`ov9281_trig_sig_pin23.sh`](./ov9281_trig_sig_pin23.sh): Raspberry Pi GPIO trigger script.
+*   [`ov9281_trig_sig_pin23_trixieos.sh`](./ov9281_trig_sig_pin23_trixieos.sh): Raspberry Pi Trixie OS trigger script.
 
 ---
 
