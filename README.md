@@ -1,4 +1,4 @@
-# U20CAM-9281M 1MP Global Shutter UVC Camera Module
+# U20CAM-9281M 1MP Global Shutter UVC Camera Module with External Trigger & Strobe Support
 
 ![U20CAM9281](Images/U20AM-9281-2.jpg)
 
