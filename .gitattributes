@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Preserve STEP mechanical design files exactly as supplied.
+*.stp -text

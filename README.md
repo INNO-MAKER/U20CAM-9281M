@@ -278,6 +278,8 @@ For detailed instructions, see [`U20CAM-SN Edit user guide.pdf`](./unique_serial
 ## Repository Structure
 
 *   [`Images/`](./Images/): Product photos and connection diagrams.
+*   [`mechanical/`](./mechanical/): Mechanical design files.
+    *   [`U20CAM-9281.stp`](./mechanical/U20CAM-9281.stp): STEP 3D model, compatible with SolidWorks, Fusion 360, FreeCAD, and other CAD tools.
 *   [`Manual/`](./Manual/): 
     *   [`U20CAM-9281M-V11.pdf`](./Manual/U20CAM-9281M-V11.pdf): Full technical user manual.
     *   [`sw.md`](./Manual/sw.md): Software setup and UVC protocol guide.
